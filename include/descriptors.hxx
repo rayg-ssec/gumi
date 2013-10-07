@@ -1,7 +1,7 @@
 #ifndef HXX_DESCRIPTORS
 #define HXX_DESCRIPTORS
 
-// gumi::fortran_descriptor_dimension : a struct describing the layout of a given array dimension
+// gumi::fortran_dimension : a struct describing the layout of a given array dimension
 // gumi::fortran_array_descriptor< element-type, number-of-dimensions > : struct template
 #include <iostream>
 

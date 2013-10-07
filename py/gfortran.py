@@ -12,20 +12,20 @@ FIXMEs
     handle slicing more completely, i.e. striding within larger arrays with offset
 
 
-typedef struct descriptor_dimension
+typedef struct dimension
 {
   index_t _stride;
   index_t _lbound;
   index_t _ubound;
 }
-descriptor_dimension;
+dimension;
 
 #define GFC_ARRAY_DESCRIPTOR(r, type) \
 struct {\
   type *data;\
   size_t offset;\
   index_t dtype;\
-  descriptor_dimension dim[r];\
+  dimension dim[r];\
 }
 
 
@@ -94,7 +94,7 @@ CTYPES_DTYPE_TAB = dict(_dtype_list_to_ctypes())
 
 
 
-class descriptor_dimension(Structure):
+class dimension(Structure):
     _fields_ = [ ('stride', index_t),
                  ('lbound', index_t),
                  ('ubound', index_t) ]
@@ -124,7 +124,7 @@ def array_descriptor(ctype, rank):
                      ('dtype_rank', index_t, 3),
                      ('dtype_type', index_t, 3),
                      ('dtype_size', index_t, sizeof(index_t)*8-6),
-                     ('dim', descriptor_dimension * rank), ]
+                     ('dim', dimension * rank), ]
 
         def allocate(self, dims, _ctype=ctype, _rank=rank):
             "allocate this descriptor and return a numpy array wrapper"
